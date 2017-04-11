@@ -5,6 +5,7 @@ import { reducer as form } from 'redux-form';
 import user from './user';
 import currentSurvey from './survey';
 import surveyList from './search';
+import resultsList from './results';
 
 const rootReducer = combineReducers({
 	routing,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
 	form,
 	user,
 	currentSurvey,
-	surveyList
+	surveyList,
+	resultsList
 });
 
 export default rootReducer;

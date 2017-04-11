@@ -25,7 +25,8 @@ class Survey extends Component {
 			const obj = nextProps.survey[0].survey.map((questions) => {
 				let newObj = {
 					question: questions.question,
-					answer: ''
+					answer: '',
+					type: questions.type
 				};
 				return newObj;
 			});
@@ -57,7 +58,7 @@ class Survey extends Component {
 
 	renderSurvey(question, num) {
 		return (
-			<div>
+			<div key={num + 'd'}   	>
 				<p>{question.question}</p>
 				{question.type === 'agreedisagree' ?
 					<div>
@@ -84,11 +85,12 @@ class Survey extends Component {
 		return (
 			<div>
 				<h1>{this.state.survey !== undefined ? this.state.survey.title : 'Survey Works!'}</h1>
-				{this.state.survey !== undefined ? this.state.survey.survey.map((question, num = 0) => {
-					num++;
-					return this.renderSurvey(question, num);
-				}) : null}
-
+				{this.state.survey.survey !== undefined || this.state.survey.survey !== null ?
+					this.state.survey.survey.map((question, num = 0) => {
+						num++;
+						return this.renderSurvey(question, num);
+					})
+					: null}
 				<Button onClick={this.onSubmit}>Add Results</Button>
 			</div>
 		);

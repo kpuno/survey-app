@@ -37,7 +37,7 @@ class SearchSurvey extends Component {
 
 	renderList(title, i, email) {
 		return (
-			<li onClick={() => this.getSurvey(title, email)} key={i}>{title}</li>
+			<li onClick={() => this.getSurvey(title, email)} key={i}>{title} by {email}</li>
 		);
 	}
 
@@ -46,8 +46,7 @@ class SearchSurvey extends Component {
 			<div>
 				<h1>Search Page Works</h1>
 				<SearchBar />
-				{console.log(this.state.survey)}
-				{this.state.survey !== null ? <ul>{this.state.survey.map((survey, i = 0) => { i++; return this.renderList(survey.title, i, survey.email) })}</ul> : null}
+				{this.state.survey !== undefined || this.state.survey !== null? <ul>{this.state.survey.map((survey, i = 0) => { i++; return this.renderList(survey.title, i, survey.email); })}</ul> : null}
 			</div>
 		);
 	}
@@ -60,7 +59,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 SearchSurvey.propTypes = {
-	surveyList: PropTypes.obj
+	surveyList: PropTypes.obj,
+	actions: PropTypes.func
 };
 
 function mapStateToProps(state) {

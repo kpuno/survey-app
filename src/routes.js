@@ -12,6 +12,8 @@ import CreateSurvey from './components/survey/CreateSurvey';
 import Dashboard from './components/Dashboard';
 import Survey from './components/survey/Survey';
 import SearchSurvey from './components/survey/SearchSurvey';
+import Analytics from './components/survey/Analytics';
+import Results from './components/survey/Results';
 
 export default (
 	<Route path="/" component={App}>
@@ -23,6 +25,8 @@ export default (
 		<Route path="/createsurvey" component={RequireAuth(CreateSurvey)}/>
 		<Route path="/survey" component={Survey}/>
 		<Route path="/searchsurvey" component={SearchSurvey}/>
+		<Route path="/analytics" component={RequireAuth(Analytics)}/>
+		<Route path="analytics/:title" component={Results} />
 		<Route path="*" component={NotFoundPage} />
 	</Route>
 );

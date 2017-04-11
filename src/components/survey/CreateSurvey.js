@@ -90,8 +90,8 @@ class CreateSurvey extends Component {
 		// 		{ q4: '' }
 		// 	]
 		// }
-		this.props.actions.addSurvey({ title, survey, email});
-		this.setState({title: '', email: ''});
+		this.props.actions.addSurvey({ title, survey, email });
+		this.setState({ title: '', email: '' });
 	}
 
 	addMultipleChoice(input, index, val) {
@@ -132,16 +132,16 @@ class CreateSurvey extends Component {
 					<p>Title</p>
 					<input type="text" onChange={this.titleChange} value={this.state.title} />
 					<div id="dynamicInput">
-						{this.state.survey.map((input, val = 0) => {
+						{this.state !== null || this.state !== undefined ? this.state.survey.map((input, val = 0) => {
 							val++;
 							let index = val - 1;
 							return (
-								<div key={val+'d'}>
-									{this.state !== null ? this.addInput(input, index, val) : ''}
+								<div key={val + 'd'}>
+									{this.addInput(input, index, val)}
 									{input.type === 'multiplechoice' ? this.addMultipleChoice(input, index, val) : ''}
 								</div>
 							);
-						})}
+						}) : null}
 					</div>
 				</Form>
 				<Button onClick={() => this.appendInput()}>Add Question</Button>

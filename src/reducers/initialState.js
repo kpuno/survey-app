@@ -11,5 +11,6 @@ export default {
 		surveys: []
 	},
 	currentSurvey: '',
-	surveyList: ''
+	surveyList: '',
+	resultsList: ''
 };
