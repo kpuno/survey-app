@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 export default class Results extends Component {
 	render() {
@@ -9,3 +9,7 @@ export default class Results extends Component {
 		);
 	}
 }
+
+// Results.propTypes = {
+
+// }
