@@ -20,7 +20,9 @@ browserSync({
   },
 
   files: [
-    'src/*.html'
+    'src/*.html',
+		'src/*.js',
+		'src/*.css',
   ],
 
   middleware: [historyApiFallback()]
