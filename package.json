@@ -3,8 +3,7 @@
   "version": "7.0.0",
   "description": "Starter kit for creating apps with React and Redux",
   "engines": {
-    "npm": "4.4.4",
-    "node": "7.7.3"
+    "npm": ">=3"
   },
   "scripts": {
     "preinstall": "node tools/nodeVersionCheck.js",
