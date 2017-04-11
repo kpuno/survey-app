@@ -11,7 +11,7 @@
     "remove-demo": "babel-node tools/removeDemo.js",
     "start-message": "babel-node tools/startMessage.js",
     "prestart": "npm-run-all --parallel start-message",
-    "start": "npm-run-all --parallel test:watch open:src lint:watch",
+    "start": "npm-run-all --parallel open:src lint:watch",
     "open:src": "babel-node tools/srcServer.js",
     "open:dist": "babel-node tools/distServer.js",
     "lint": "esw webpack.config.* src tools --color",
@@ -31,14 +31,20 @@
   "author": "Cory House",
   "license": "MIT",
   "dependencies": {
+    "axios": "0.16.0",
+    "bootstrap": "3.3.7",
     "object-assign": "4.1.0",
     "react": "15.4.1",
+    "react-bootstrap": "0.30.8",
     "react-dom": "15.4.1",
     "react-redux": "5.0.1",
     "react-router": "3.0.0",
+    "react-router-bootstrap": "0.23.1",
     "react-router-redux": "4.0.7",
     "redux": "3.6.0",
-    "redux-thunk": "2.1.0"
+    "redux-form": "6.6.1",
+    "redux-thunk": "2.1.0",
+    "toastr": "2.1.2"
   },
   "devDependencies": {
     "autoprefixer": "6.5.4",
@@ -79,6 +85,7 @@
     "react-addons-test-utils": "15.4.1",
     "react-hot-loader": "3.0.0-beta.6",
     "redux-immutable-state-invariant": "1.2.4",
+    "redux-logger": "3.0.1",
     "replace": "0.3.0",
     "rimraf": "2.5.4",
     "sass-loader": "6.0.2",

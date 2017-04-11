@@ -1,18 +1,17 @@
-import React from 'react';
-import {Link} from 'react-router';
+import React, { PropTypes } from 'react';
+import { SearchBar } from './SearchBar';
 
-const HomePage = () => {
-  return (
-    <div>
-      <h1>React Slingshot</h1>
+export default class HomePage extends React.Component {
+	constructor(props) {
+		super(props);
+	}
 
-      <h2>Get Started</h2>
-      <ol>
-        <li>Review the <Link to="fuel-savings">demo app</Link></li>
-        <li>Remove the demo and start coding: npm run remove-demo</li>
-      </ol>
-    </div>
-  );
-};
-
-export default HomePage;
+	render() {
+		return (
+			<div>
+				<h1>Home Page Works!</h1>
+				{/*<SearchBar/>*/}
+			</div>
+		);
+	}
+}
