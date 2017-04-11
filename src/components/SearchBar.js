@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import * as searchActions from '../reducers/search';
 import { bindActionCreators } from 'redux';
 import { FormGroup, InputGroup, FormControl, Button } from 'react-bootstrap';
@@ -19,15 +20,12 @@ class SearchBar extends React.Component {
 	onFormSubmit(event) {
 		event.preventDefault();
 		this.props.actions.searchSurvey(this.state.term);
-			// .then(() => this.redirect())
-			// .catch(error => {
-			// 	throw (error);
-			// });
+		this.redirect();
 		this.setState({ term: '' });
 	}
 
 	redirect() {
-		this.context.router.push('/searchsurvey');
+		browserHistory.push('/searchsurvey');
 	}
 
 	onInputChange(event) {

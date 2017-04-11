@@ -13,8 +13,8 @@ class Dashboard extends Component {
 		this.displaySurveys = this.displaySurveys.bind(this);
 	}
 
-	getSurvey(title) {
-		this.props.actions.getSurvey(title);
+	getSurvey(title, email) {
+		this.props.actions.getSurvey(title, email);
 		browserHistory.push('/survey');
 	}	
 
@@ -24,7 +24,7 @@ class Dashboard extends Component {
 				{this.props.user.surveys.map((survey, i = 0) => {
 					i++;
 					return (
-						<li key={i} onClick={() => this.getSurvey(survey.title)}>{survey.title}</li>
+						<li key={i} onClick={() => this.getSurvey(survey.title, survey.email)}>{survey.title}</li>
 					);
 				})}
 			</ul>

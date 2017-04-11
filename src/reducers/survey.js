@@ -27,9 +27,9 @@ export function addSurvey({ title, survey, email }) {
 	};
 }
 
-export function getSurvey(title) {
+export function getSurvey(title, email) {
 	return function (dispatch) {
-		axios.post(`${HOST_URL}/searchsurveys`, { title })
+		axios.post(`${HOST_URL}/searchsurveys`, { title, email })
 			.then(response => {
 				const currentSurvey = response.data;
 				dispatch({ type: GET_CURRENT_SURVEY, currentSurvey });
