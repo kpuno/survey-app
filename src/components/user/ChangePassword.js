@@ -60,7 +60,7 @@ class ChangePassword extends Component {
 					</FormGroup>
 					<Button>
 						Submit
-    			</Button>
+					</Button>
 				</form>
 			</div>
 		);
@@ -68,12 +68,12 @@ class ChangePassword extends Component {
 
 }
 
-EditProfile.propTypes = {
-	user: PropTypes.object
+ChangePassword.propTypes = {
+	user: PropTypes.obj
 };
 
 function mapStateToProps(state) {
-	return {
+	return	{
 		user: state.user
 	};
 }

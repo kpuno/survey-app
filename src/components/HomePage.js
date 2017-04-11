@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-import { SearchBar } from './SearchBar';
+import React from 'react';
+import SearchBar from './SearchBar';
 
 export default class HomePage extends React.Component {
 	constructor(props) {
@@ -9,8 +9,8 @@ export default class HomePage extends React.Component {
 	render() {
 		return (
 			<div>
-				<h1>Home Page Works!</h1>
-				{/*<SearchBar/>*/}
+				<h2>Home Page</h2>
+				<SearchBar/>
 			</div>
 		);
 	}

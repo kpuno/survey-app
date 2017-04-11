@@ -36,7 +36,7 @@ class EditProfile extends Component {
 		if(email == null || email.length === 0) { email = this.props.user.email;}
 		if(displayName == null || displayName.length === 0) { displayName = this.props.user.displayName;}
 		this.props.actions.updateUser(currentEmail, email, displayName);
-		this.setState({email: '', displayName: ''})
+		this.setState({email: '', displayName: ''});
 	}
 
 	render() {
@@ -73,7 +73,7 @@ class EditProfile extends Component {
 					</FormGroup>
 					<Button onClick={this.onSubmit}>
 						Submit
-    			</Button>
+					</Button>
 				</form>
 			</div>
 		);
@@ -82,19 +82,20 @@ class EditProfile extends Component {
 }
 
 EditProfile.propTypes = {
-	user: PropTypes.object
+	user: PropTypes.object,
+	actions: PropTypes.func
 };
 
 function mapStateToProps(state) {
 	return {
-		user: state.user
+		user: state.user,
 	};
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
 		actions: bindActionCreators(userActions, dispatch)
-	}
+	};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);

@@ -10,11 +10,11 @@ const renderField = ({ input, placeholder, type, meta: { touched, error, warning
   </div>
 );
 
-renderField.PropTypes = {
+renderField.propTypes = {
 	input: PropTypes.string,
 	placeholder: PropTypes.string,
 	type: PropTypes.string,
 	meta: PropTypes.object
-}
+};
 
 export default renderField;

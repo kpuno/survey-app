@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as searchActions from '../reducers/search';
 import { bindActionCreators } from 'redux';
-import { FormGroup, InputGroup, FormControl, Button, Grid } from 'react-bootstrap';
+import { FormGroup, InputGroup, FormControl, Button } from 'react-bootstrap';
 
 class SearchBar extends React.Component {
 	constructor(props) {
@@ -17,8 +17,8 @@ class SearchBar extends React.Component {
 	}
 
 	onFormSubmit(event) {
-		// event.preventDefault();
-		this.props.actions.searchSurvey(this.state.term)
+		event.preventDefault();
+		this.props.actions.searchSurvey(this.state.term);
 			// .then(() => this.redirect())
 			// .catch(error => {
 			// 	throw (error);
@@ -51,6 +51,11 @@ class SearchBar extends React.Component {
 				</form>
 		);
 	}
+}
+
+SearchBar.propTypes = {
+	event: PropTypes.object,
+	actions: PropTypes.func
 };
 
 function mapDispatchToProps(dispatch) {

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as surveyActions from '../../reducers/survey';
-import { Button, Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 class Survey extends Component {
 	constructor(props) {
@@ -13,7 +13,7 @@ class Survey extends Component {
 			email: '',
 			results: [],
 			survey: ''
-		}
+		};
 
 		this.renderSurvey = this.renderSurvey.bind(this);
 		this.handleOptionChange = this.handleOptionChange.bind(this);
@@ -26,10 +26,10 @@ class Survey extends Component {
 				let newObj = {
 					question: questions.question,
 					answer: ''
-				}
+				};
 				return newObj;
-			})
-			this.setState({ title: nextProps.survey[0].title, email: nextProps.survey[0].email, survey: nextProps.survey[0], results: obj })
+			});
+			this.setState({ title: nextProps.survey[0].title, email: nextProps.survey[0].email, survey: nextProps.survey[0], results: obj });
 		}
 	}
 
@@ -51,10 +51,6 @@ class Survey extends Component {
 		let title = this.state.title;
 		let results = this.state.results;
 		let email = this.state.email;
-
-		console.log(title);
-		console.log(email);
-		console.log(results);
 
 		this.props.actions.addResults({ title, results, email });
 	}
@@ -81,7 +77,7 @@ class Survey extends Component {
 					</div> : null}
 				<br />
 			</div>
-		)
+		);
 	}
 
 	render() {
@@ -90,7 +86,7 @@ class Survey extends Component {
 				<h1>{this.state.survey !== undefined ? this.state.survey.title : 'Survey Works!'}</h1>
 				{this.state.survey !== undefined ? this.state.survey.survey.map((question, num = 0) => {
 					num++;
-					return this.renderSurvey(question, num)
+					return this.renderSurvey(question, num);
 				}) : null}
 
 				<Button onClick={this.onSubmit}>Add Results</Button>
@@ -99,10 +95,15 @@ class Survey extends Component {
 	}
 }
 
+Survey.propTypes = {
+	user: PropTypes.obj,
+	actions: PropTypes.func
+};
+
 function mapDispatchToProps(dispatch) {
 	return {
 		actions: bindActionCreators(surveyActions, dispatch)
-	}
+	};
 }
 
 function mapStateToProps(state) {

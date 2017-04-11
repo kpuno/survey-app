@@ -1,7 +1,8 @@
 import initialState from './initialState';
 import axios from 'axios';
 const HOST_URL = 'https://survey-app-api.herokuapp.com';
-
+import { getUserSurveys } from './user';
+import { authError } from './auth';
 // actions
 export const ADD_SURVEY_SUCCESS = 'ADD_SURVEY_SUCCESS';
 export const GET_CURRENT_SURVEY = 'GET_CURRENT_SURVEY';
@@ -14,16 +15,16 @@ export function addSurvey({ title, survey, email }) {
 			.then(response => {
 				// toastr added survey success
 				// title is random change later	
-				dispatch({ type: ADD_SURVEY_SUCCESS, title });
+				dispatch({ type: ADD_SURVEY_SUCCESS, response });
 			})
 			.then(axios.post(`${HOST_URL}/getusersurveys`, { email })
-			.then(response => {
-				getUserSurveys(dispatch, response.data);
-			}))
+				.then(response => {
+					getUserSurveys(dispatch, response.data);
+				}))
 			.catch(error => {
 				authError(dispatch, error);
-			})
-	}
+			});
+	};
 }
 
 export function getSurvey(title) {
@@ -32,17 +33,17 @@ export function getSurvey(title) {
 			.then(response => {
 				const currentSurvey = response.data;
 				dispatch({ type: GET_CURRENT_SURVEY, currentSurvey });
-			})
-	}
+			});
+	};
 }
 
-export function addResults({title, results, email}) {
+export function addResults({ title, results, email }) {
 	return function (dispatch) {
 		axios.post(`${HOST_URL}/addresults`, { title, email, results })
 			.then(response => {
 				dispatch({ type: ADD_RESULTS, response });
-			})
-	}
+			});
+	};
 }
 
 // action creators

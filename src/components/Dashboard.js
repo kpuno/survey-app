@@ -25,10 +25,10 @@ class Dashboard extends Component {
 					i++;
 					return (
 						<li key={i} onClick={() => this.getSurvey(survey.title)}>{survey.title}</li>
-					)
+					);
 				})}
 			</ul>
-		)
+		);
 	}
 
 	render() {
@@ -38,14 +38,19 @@ class Dashboard extends Component {
 					<Button><Link to="/createsurvey">Create Survey</Link></Button>
 					{this.props.user.surveys !== undefined ? this.displaySurveys() : null}
 			</div>
-		)
+		);
 	}
 }
+
+Dashboard.propTypes = {
+	actions: PropTypes.func,
+	user: PropTypes.object
+};
 
 function mapDispatchToProps(dispatch) {
 	return {
 		actions: bindActionCreators(surveyActions, dispatch)
-	}
+	};
 }
 
 function mapStateToProps(state) {

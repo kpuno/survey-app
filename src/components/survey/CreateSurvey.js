@@ -41,7 +41,7 @@ class CreateSurvey extends Component {
 				{ q3: '' },
 				{ q4: '' }
 			]
-		}
+		};
 		this.setState({ survey: this.state.survey.concat(newObj) });
 	}
 
@@ -80,18 +80,18 @@ class CreateSurvey extends Component {
 		let title = this.state.title;
 		let survey = this.state.survey;
 		let email = this.props.user.email;
-		let newObj = {
-			question: '',
-			type: '',
-			multiplechoice: [
-				{ q1: '' },
-				{ q2: '' },
-				{ q3: '' },
-				{ q4: '' }
-			]
-		}
+		// let newObj = {
+		// 	question: '',
+		// 	type: '',
+		// 	multiplechoice: [
+		// 		{ q1: '' },
+		// 		{ q2: '' },
+		// 		{ q3: '' },
+		// 		{ q4: '' }
+		// 	]
+		// }
 		this.props.actions.addSurvey({ title, survey, email});
-		this.setState({title: '', email: ''})
+		this.setState({title: '', email: ''});
 	}
 
 	addMultipleChoice(input, index, val) {
@@ -106,7 +106,7 @@ class CreateSurvey extends Component {
 				<br />
 				<input type="text" onChange={this.mcChange} key={val + 4 + "c"} name={3} id={val} />
 			</div>
-		)
+		);
 	}
 
 	addInput(input, index, val) {
@@ -121,7 +121,7 @@ class CreateSurvey extends Component {
 				</select>
 				<br /><br />
 			</div>
-		)
+		);
 	}
 
 	render() {
@@ -136,12 +136,11 @@ class CreateSurvey extends Component {
 							val++;
 							let index = val - 1;
 							return (
-								<div>
+								<div key={val+'d'}>
 									{this.state !== null ? this.addInput(input, index, val) : ''}
 									{input.type === 'multiplechoice' ? this.addMultipleChoice(input, index, val) : ''}
-									{console.log(this.state.title)}
 								</div>
-							)
+							);
 						})}
 					</div>
 				</Form>
@@ -152,10 +151,15 @@ class CreateSurvey extends Component {
 	}
 }
 
+CreateSurvey.propTypes = {
+	user: PropTypes.object,
+	actions: PropTypes.func
+};
+
 function mapDispatchToProps(dispatch) {
 	return {
 		actions: bindActionCreators(surveyActions, dispatch)
-	}
+	};
 }
 
 function mapStateToProps(state) {

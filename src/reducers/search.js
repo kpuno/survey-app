@@ -12,8 +12,8 @@ export function searchSurvey(title) {
 			.then(response => {
 				const surveyList = response.data;
 				dispatch({ type: GET_SEARCHED_SURVEY, surveyList });
-			})
-	}
+			});
+	};
 }
 
 // action creators

@@ -1,6 +1,7 @@
 import initialState from './initialState';
 import axios from 'axios';
 const HOST_URL = 'https://survey-app-api.herokuapp.com';
+import { authError } from './auth';
 
 // actions
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
@@ -12,7 +13,7 @@ export const GET_USER_SURVEYS_SUCCESS = 'GET_USER_SURVEYS_SUCCESS';
 export function updateUser(currentEmail, email, displayName) {
 	return function (dispatch) {
 		axios.post(`${HOST_URL}/edituserinfo`, { currentEmail, email, displayName })
-			.then(response => {
+			.then(() => {
 				// nothing to do
 			})
 			.then(axios.post(`${HOST_URL}/getuserinfo`, { email })
@@ -21,7 +22,7 @@ export function updateUser(currentEmail, email, displayName) {
 					dispatch({ type: GET_USER_SUCCESS, userInfo });
 				})
 				.catch(error => {
-					console.log(error);
+					return error;
 				}))
 			.catch(error => {
 				authError(dispatch, error);

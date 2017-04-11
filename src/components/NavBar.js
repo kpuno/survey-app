@@ -79,7 +79,7 @@ NavBar.propTypes = {
 	user: PropTypes.string,
 	deAuthUser: PropTypes.func,
 	authenticated: PropTypes.bool
-}
+};
 
 function mapStateToProps(state) {
 	return {

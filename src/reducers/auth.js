@@ -44,7 +44,7 @@ export function signInUser({ email, password }) {
 			))
 			.catch(error => {
 				authError(dispatch, error);
-			})
+			});
 	};
 }
 
@@ -84,7 +84,7 @@ export function fetchData() {
 	};
 }
 
-function authError(dispatch, error) {
+export function authError(dispatch, error) {
 	dispatch({ type: AUTH_ERROR, message: error.message });
 }
 

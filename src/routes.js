@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Route } from 'react-router';
 
 import App from './components/App';
 import HomePage from './components/HomePage';
@@ -12,7 +12,6 @@ import CreateSurvey from './components/survey/CreateSurvey';
 import Dashboard from './components/Dashboard';
 import Survey from './components/survey/Survey';
 import SearchSurvey from './components/survey/SearchSurvey';
-import SearchBar from './components/SearchBar';
 
 export default (
 	<Route path="/" component={App}>
@@ -24,7 +23,6 @@ export default (
 		<Route path="/createsurvey" component={RequireAuth(CreateSurvey)}/>
 		<Route path="/survey" component={Survey}/>
 		<Route path="/searchsurvey" component={SearchSurvey}/>
-		<Route path="/searchbar" component={SearchBar}/>
 		<Route path="*" component={NotFoundPage} />
 	</Route>
 );

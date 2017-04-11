@@ -31,6 +31,7 @@ class SignUp extends Component {
 
 SignUp.propTypes = {
   signUpUser: PropTypes.func,
+	errorMessage: PropTypes.string
 };
 
 function mapStateToProps(state) {
