@@ -46,7 +46,7 @@ class SearchSurvey extends Component {
 			<div>
 				<h1>Search Page Works</h1>
 				<SearchBar />
-				{this.state.survey !== undefined || this.state.survey !== null? <ul>{this.state.survey.map((survey, i = 0) => { i++; return this.renderList(survey.title, i, survey.email); })}</ul> : null}
+				{this.state.survey.length !== 0 ?  <ul>{this.state.survey.map((survey, i = 0) => { i++; return this.renderList(survey.title, i, survey.email); })}</ul> : null}
 			</div>
 		);
 	}
