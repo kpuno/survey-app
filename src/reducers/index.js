@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
-import {routerReducer as routing} from 'react-router-redux';
+import { routerReducer as routing } from 'react-router-redux';
 import auth from './auth';
 import { reducer as form } from 'redux-form';
 import user from './user';
 import currentSurvey from './survey';
 import surveyList from './search';
 import resultsList from './results';
+import isLoading from './loading';
 
 const rootReducer = combineReducers({
 	routing,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
 	user,
 	currentSurvey,
 	surveyList,
-	resultsList
+	resultsList,
+	isLoading
 });
 
 export default rootReducer;

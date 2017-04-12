@@ -12,7 +12,7 @@ class Survey extends Component {
 			title: '',
 			email: '',
 			results: [],
-			survey: ''
+			survey: []
 		};
 
 		this.renderSurvey = this.renderSurvey.bind(this);
@@ -21,7 +21,7 @@ class Survey extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps) {
+		if (nextProps !== null || nextProps !== undefined) {
 			const obj = nextProps.survey[0].survey.map((questions) => {
 				let newObj = {
 					question: questions.question,
@@ -85,7 +85,7 @@ class Survey extends Component {
 		return (
 			<div>
 				<h1>{this.state.survey !== undefined ? this.state.survey.title : 'Survey Works!'}</h1>
-				{this.state.survey.survey !== undefined || this.state.survey.survey !== null ?
+				{this.state.survey.length != 0 ?
 					this.state.survey.survey.map((question, num = 0) => {
 						num++;
 						return this.renderSurvey(question, num);
@@ -98,7 +98,6 @@ class Survey extends Component {
 }
 
 Survey.propTypes = {
-	user: PropTypes.obj,
 	actions: PropTypes.func
 };
 

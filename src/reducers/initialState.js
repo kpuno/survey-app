@@ -11,6 +11,9 @@ export default {
 		surveys: []
 	},
 	currentSurvey: '',
-	surveyList: '',
-	resultsList: ''
+	surveyList: [],
+	resultsList: [],
+	isLoading: {
+		isLoading: false
+	}
 };

@@ -3,6 +3,7 @@ import { browserHistory } from 'react-router';
 import initialState from './initialState';
 import { displayName, getUserSurveys } from './user';
 const HOST_URL = 'https://survey-app-api.herokuapp.com';
+import { requestData, receiveData } from './loading';
 
 // actions
 const AUTH_USER = 'AUTH_USER';
@@ -34,14 +35,14 @@ export function signInUser({ email, password }) {
 				authorizeUser(dispatch, response.data.token, email);
 			})
 			.then(axios.post(`${HOST_URL}/getuserinfo`, { email })
-			.then(response => {
-				displayName(dispatch, response.data);
-			})
-			.then(axios.post(`${HOST_URL}/getusersurveys`, { email })
-			.then(response => {
-				getUserSurveys(dispatch, response.data);
-			})
-			))
+				.then(response => {
+					displayName(dispatch, response.data);
+				})
+				.then(axios.post(`${HOST_URL}/getusersurveys`, { email })
+					.then(response => {
+						getUserSurveys(dispatch, response.data);
+					})
+				))
 			.catch(error => {
 				authError(dispatch, error);
 			});

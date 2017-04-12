@@ -10,7 +10,7 @@ class SearchSurvey extends Component {
 		super(props);
 
 		this.state = {
-			survey: ''
+			survey: []
 		};
 
 		this.renderList = this.renderList.bind(this);

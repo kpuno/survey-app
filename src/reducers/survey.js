@@ -3,6 +3,8 @@ import axios from 'axios';
 const HOST_URL = 'https://survey-app-api.herokuapp.com';
 import { getUserSurveys } from './user';
 import { authError } from './auth';
+import { requestData, receiveData } from './loading';
+
 // actions
 export const ADD_SURVEY_SUCCESS = 'ADD_SURVEY_SUCCESS';
 export const GET_CURRENT_SURVEY = 'GET_CURRENT_SURVEY';
@@ -11,6 +13,7 @@ export const ADD_RESULTS = 'ADD_RESULTS';
 // reducer
 export function addSurvey({ title, survey, email }) {
 	return function (dispatch) {
+		dispatch(requestData());
 		axios.post(`${HOST_URL}/addsurvey`, { title, survey, email })
 			.then(response => {
 				// toastr added survey success
@@ -19,6 +22,7 @@ export function addSurvey({ title, survey, email }) {
 			})
 			.then(axios.post(`${HOST_URL}/getusersurveys`, { email })
 				.then(response => {
+					dispatch(receiveData());
 					getUserSurveys(dispatch, response.data);
 				}))
 			.catch(error => {
@@ -29,8 +33,10 @@ export function addSurvey({ title, survey, email }) {
 
 export function getSurvey(title, email) {
 	return function (dispatch) {
+		dispatch(requestData());
 		axios.post(`${HOST_URL}/searchsurveys`, { title, email })
 			.then(response => {
+				dispatch(receiveData());
 				const currentSurvey = response.data;
 				dispatch({ type: GET_CURRENT_SURVEY, currentSurvey });
 			});
@@ -39,8 +45,10 @@ export function getSurvey(title, email) {
 
 export function addResults({ title, results, email }) {
 	return function (dispatch) {
+		dispatch(requestData());
 		axios.post(`${HOST_URL}/addresults`, { title, email, results })
 			.then(response => {
+				dispatch(receiveData());
 				dispatch({ type: ADD_RESULTS, response });
 			});
 	};
