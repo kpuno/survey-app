@@ -52,7 +52,7 @@ class Survey extends Component {
 		let title = this.state.title;
 		let results = this.state.results;
 		let email = this.state.email;
-
+		
 		this.props.actions.addResults({ title, results, email });
 	}
 

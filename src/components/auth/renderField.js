@@ -11,7 +11,7 @@ const renderField = ({ input, placeholder, type, meta: { touched, error, warning
 );
 
 renderField.propTypes = {
-	input: PropTypes.string,
+	input: PropTypes.object,
 	placeholder: PropTypes.string,
 	type: PropTypes.string,
 	meta: PropTypes.object

@@ -18,17 +18,17 @@ export default function(state = initialState.isLoading, action = null) {
 		default:
 			return state;
 	}
-};
+}
 
 // action creators
 export function requestData() {
-	return {type: REQ_DATA}
-};
+	return {type: REQ_DATA};
+}
 
 export function receiveData() {
-	return{type: RECV_DATA}
-};
+	return{type: RECV_DATA};
+}
 
 export function receiveError() {
-	return {type: RECV_ERROR}
-};
+	return {type: RECV_ERROR};
+}

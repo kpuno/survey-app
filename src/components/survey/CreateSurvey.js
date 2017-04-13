@@ -17,7 +17,8 @@ class CreateSurvey extends Component {
 					{ q2: '' },
 					{ q3: '' },
 					{ q4: '' }
-				]
+				],
+				expiryDate: ''
 			}]
 		};
 
@@ -75,11 +76,23 @@ class CreateSurvey extends Component {
 		this.setState({ title: e.target.value });
 	}
 
+	dateChange(e) {
+		this.setState({ date: e.target.value });
+	}
+
+	// 	function myFunction() {
+	// 	var date = '2015-12-04';
+	// 	var d = new Date(date);
+	// 	var n = d.toDateString();
+	// 	document.getElementById("demo").innerHTML = n;
+	// }
+
 	onSubmit() {
 		// event.preventDefault();
 		let title = this.state.title;
 		let survey = this.state.survey;
 		let email = this.props.user.email;
+		let date = new Date(this.state.expiryDate);
 		// let newObj = {
 		// 	question: '',
 		// 	type: '',
@@ -90,8 +103,8 @@ class CreateSurvey extends Component {
 		// 		{ q4: '' }
 		// 	]
 		// }
-		this.props.actions.addSurvey({ title, survey, email });
-		this.setState({ title: '', email: '' });
+		this.props.actions.addSurvey({ title, survey, email, date });
+		this.setState({ title: '', email: '', date: '' });
 	}
 
 	addMultipleChoice(input, index, val) {
@@ -131,6 +144,8 @@ class CreateSurvey extends Component {
 					<h1>Create Survey</h1>
 					<p>Title</p>
 					<input type="text" onChange={this.titleChange} value={this.state.title} />
+					<p>Expiry Date</p>
+					<input type="text" onChange={this.dateChange} value={this.state.expiryDate} />
 					<div id="dynamicInput">
 						{this.state !== null || this.state !== undefined ? this.state.survey.map((input, val = 0) => {
 							val++;
@@ -152,8 +167,8 @@ class CreateSurvey extends Component {
 }
 
 CreateSurvey.propTypes = {
-	user: PropTypes.object,
-	actions: PropTypes.func
+	actions: PropTypes.func,
+	user: PropTypes.object
 };
 
 function mapDispatchToProps(dispatch) {

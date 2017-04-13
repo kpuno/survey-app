@@ -11,10 +11,10 @@ export const GET_CURRENT_SURVEY = 'GET_CURRENT_SURVEY';
 export const ADD_RESULTS = 'ADD_RESULTS';
 
 // reducer
-export function addSurvey({ title, survey, email }) {
+export function addSurvey({ title, survey, email, date }) {
 	return function (dispatch) {
 		dispatch(requestData());
-		axios.post(`${HOST_URL}/addsurvey`, { title, survey, email })
+		axios.post(`${HOST_URL}/addsurvey`, { title, survey, email, date })
 			.then(response => {
 				// toastr added survey success
 				// title is random change later	

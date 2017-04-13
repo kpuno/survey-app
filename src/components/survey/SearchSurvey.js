@@ -10,7 +10,8 @@ class SearchSurvey extends Component {
 		super(props);
 
 		this.state = {
-			survey: []
+			survey: [],
+			today: new Date().toDateString()
 		};
 
 		this.renderList = this.renderList.bind(this);
@@ -22,7 +23,8 @@ class SearchSurvey extends Component {
 			const obj = Object.keys(nextProps.surveyList).map(function (key) {
 				let newObj = {
 					title: nextProps.surveyList[key].title,
-					email: nextProps.surveyList[key].email
+					email: nextProps.surveyList[key].email,
+					expiryDate: new Date(nextProps.surveyList[key].expiryDate).toDateString()
 				};
 				return newObj;
 			});
@@ -33,12 +35,22 @@ class SearchSurvey extends Component {
 	getSurvey(title, email) {
 		this.props.actions.getSurvey(title, email);
 		browserHistory.push('/survey');
-	}	
+	}
 
-	renderList(title, i, email) {
-		return (
-			<li onClick={() => this.getSurvey(title, email)} key={i}>{title} by {email}</li>
-		);
+	expiredLink() {
+		browserHistory.push('/surveyexipred');
+	}
+
+	renderList(title, i, email, expiryDate) {
+		if (expiryDate > this.state.today) {
+			return (
+				<li onClick={() => this.getSurvey(title, email)} key={i}>{title} by {email} expires: {expiryDate} datenow: {this.state.today}</li>
+			);
+		} else {
+			return (
+				<li onClick={() => this.expiredLink()} key={i}>{title} by {email} expires: {expiryDate} datenow: {this.state.today} EXPIRED!</li>
+			);
+		}
 	}
 
 	render() {
@@ -46,7 +58,7 @@ class SearchSurvey extends Component {
 			<div>
 				<h1>Search Page Works</h1>
 				<SearchBar />
-				{this.state.survey.length !== 0 ?  <ul>{this.state.survey.map((survey, i = 0) => { i++; return this.renderList(survey.title, i, survey.email); })}</ul> : null}
+				{this.state.survey.length !== 0 ? <ul>{this.state.survey.map((survey, i = 0) => { i++; return this.renderList(survey.title, i, survey.email, survey.expiryDate); })}</ul> : null}
 			</div>
 		);
 	}
@@ -59,8 +71,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 SearchSurvey.propTypes = {
-	surveyList: PropTypes.obj,
-	actions: PropTypes.func
+	actions: PropTypes.func,
+	surveyList: PropTypes.object
 };
 
 function mapStateToProps(state) {

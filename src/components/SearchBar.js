@@ -34,7 +34,7 @@ class SearchBar extends React.Component {
 
 	render() {
 		return (
-				<form /*onSubmit={this.onFormSubmit}*/>
+				<form onSubmit={this.onFormSubmit}>
 					<FormGroup>
 						<InputGroup>
 							<FormControl
@@ -43,7 +43,7 @@ class SearchBar extends React.Component {
 								placeholder="Search for.."
 								onChange={this.onInputChange}
 							/>
-							<Button bsStyle="primary" onClick={this.onFormSubmit}>Search</Button>
+							<Button onClick={this.onFormSubmit} bsStyle="primary">Search</Button>
 						</InputGroup>
 					</FormGroup>
 				</form>

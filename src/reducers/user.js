@@ -62,6 +62,6 @@ export function getUserSurveys(dispatch, surveys) {
 	dispatch({ type: GET_USER_SURVEYS_SUCCESS, surveys});
 }
 
-export function displayName(dispatch, userInfo) {
+export function getDisplayName(dispatch, userInfo) {
 	dispatch({ type: GET_USER_SUCCESS, userInfo });
 }

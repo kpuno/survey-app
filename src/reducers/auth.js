@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 import initialState from './initialState';
-import { displayName, getUserSurveys } from './user';
+import { getDisplayName, getUserSurveys } from './user';
 const HOST_URL = 'https://survey-app-api.herokuapp.com';
 import { requestData, receiveData } from './loading';
 
@@ -30,16 +30,18 @@ export default function (state = initialState.auth, action) {
 // action creators
 export function signInUser({ email, password }) {
 	return function (dispatch) {
+		dispatch(requestData());
 		axios.post(`${HOST_URL}/signin`, { email, password })
 			.then(response => {
 				authorizeUser(dispatch, response.data.token, email);
 			})
 			.then(axios.post(`${HOST_URL}/getuserinfo`, { email })
 				.then(response => {
-					displayName(dispatch, response.data);
+					getDisplayName(dispatch, response.data);
 				})
 				.then(axios.post(`${HOST_URL}/getusersurveys`, { email })
 					.then(response => {
+						dispatch(receiveData());
 						getUserSurveys(dispatch, response.data);
 					})
 				))
@@ -51,10 +53,27 @@ export function signInUser({ email, password }) {
 
 export function signUpUser({ email, password, displayName }) {
 	return function (dispatch) {
+		dispatch(requestData());
 		axios.post(`${HOST_URL}/signup`, { email, password, displayName })
 			.then(response => {
 				authorizeUser(dispatch, response.data.token);
 			})
+			.then(() =>
+				new Promise(resolve => {
+					setTimeout(() => {
+						axios.post(`${HOST_URL}/getuserinfo`, { email })
+							.then(response => {
+								getDisplayName(dispatch, response.data);
+							})
+							.then(axios.post(`${HOST_URL}/getusersurveys`, { email })
+								.then(response => {
+									dispatch(receiveData());
+									getUserSurveys(dispatch, response.data);
+								})
+							);
+						resolve();
+					}, 2000);
+				}))
 			.catch(error => {
 				authError(dispatch, error);
 			});

@@ -11,7 +11,7 @@ class App extends React.Component {
 		return (
 			<div>
 				<NavBar />
-				<div className='container'>
+				<div className="container">
 					{this.props.isLoading.isLoading ? <Spinner /> : this.props.children}
 				</div>
 			</div>
@@ -20,7 +20,8 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-	children: PropTypes.element
+	children: PropTypes.element,
+	isLoading: PropTypes.bool
 };
 
 function mapStateToProps(state) {

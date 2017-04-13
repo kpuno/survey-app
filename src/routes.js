@@ -13,20 +13,22 @@ import Dashboard from './components/Dashboard';
 import Survey from './components/survey/Survey';
 import SearchSurvey from './components/survey/SearchSurvey';
 import Analytics from './components/survey/Analytics';
-import Results from './components/survey/Results';
+import SurveyStats from './components/survey/SurveyStats';
+import Exipred from './components/survey/Exipred';
 
 export default (
 	<Route path="/" component={App}>
 		<Route path="/home" component={HomePage} />
 		<Route path="/signin" component={SignIn} />
 		<Route path="/signup" component={SignUp} />
-		<Route path="/dashboard" component={RequireAuth(Dashboard)}/>
-		<Route path="/editprofile" component={RequireAuth(EditProfile)}/>
-		<Route path="/createsurvey" component={RequireAuth(CreateSurvey)}/>
-		<Route path="/survey" component={Survey}/>
-		<Route path="/searchsurvey" component={SearchSurvey}/>
-		<Route path="/analytics" component={RequireAuth(Analytics)}/>
-		<Route path="analytics/:title" component={Results} />
+		<Route path="/dashboard" component={RequireAuth(Dashboard)} />
+		<Route path="/editprofile" component={RequireAuth(EditProfile)} />
+		<Route path="/createsurvey" component={RequireAuth(CreateSurvey)} />
+		<Route path="/survey" component={Survey} />
+		<Route path="/searchsurvey" component={SearchSurvey} />
+		<Route path="/surveyexipred" component={Exipred} />
+		<Route path="/analytics" component={RequireAuth(Analytics)} />
+		<Route path="analytics/:title" component={RequireAuth(SurveyStats)} />
 		<Route path="*" component={NotFoundPage} />
 	</Route>
 );
