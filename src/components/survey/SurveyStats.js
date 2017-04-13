@@ -18,7 +18,7 @@ class SurveyStats extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (Object.keys(nextProps.results).length !== 0 && nextProps.results.constructor !== Object) {
+		if (Object.keys(nextProps.results).length !== 0) {
 			let respondents = 0;
 			let questions = [];
 
@@ -55,7 +55,6 @@ class SurveyStats extends Component {
 					question.results = newArray;
 				}
 			});
-
 			this.setState({ questions: questions });
 		}
 	}
@@ -132,6 +131,7 @@ class SurveyStats extends Component {
 				<h1>Survey Stats</h1>
 				<strong>Number of respondents:</strong> 
 				{this.state.respondents ? this.state.respondents : null}
+				{console.log(this.state.questions)}
 				{this.state.questions.length !== 0 ? this.state.questions.map((question, i=0) => {
 					i++;
 					return (
@@ -165,8 +165,8 @@ class SurveyStats extends Component {
 }
 
 SurveyStats.propTypes = {
-	actions: PropTypes.func,
-	results: PropTypes.object
+	results: PropTypes.object,
+	actions: PropTypes.func
 };
 
 function mapDispatchToProps(dispatch) {
