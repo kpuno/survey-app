@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import NavBar from './NavBar';
 import Spinner from './Spinner';
 import { connect } from 'react-redux';
+const ImgVar = "http://linkword-pro.fr/images/background2.jpg";
 
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless

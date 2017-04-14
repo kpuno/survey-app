@@ -55,7 +55,7 @@ class SurveyStats extends Component {
 					question.results = newArray;
 				}
 			});
-			this.setState({ questions: questions });
+			this.setState({ questions: questions, title: this.props.params.title });
 		}
 	}
 
@@ -129,36 +129,53 @@ class SurveyStats extends Component {
 		return (
 			<div>
 				<h1>Survey Stats</h1>
-				<strong>Number of respondents:</strong> 
-				{this.state.respondents ? this.state.respondents : null}
-				{console.log(this.state.questions)}
-				{this.state.questions.length !== 0 ? this.state.questions.map((question, i=0) => {
-					i++;
-					return (
-						<div key={i+'d'}>
-							<strong>{question.title}</strong>
-							<br />
-							{
-								question.type === 'agreedisagree' ?
-									this.agreeDisagreeResults(question) : null
-							}
-							{
-								question.type === 'multiplechoice' ?
-									question.results.map((answer) => {
-										return this.multipleChoiceResults(answer);
-									}) : null
-							}
-							{
-								question.type === 'shortanswer' ?
-									question.results.map((answer, i) => {
-										i++;
-										return this.shortAnswerResults(answer);
-									}) : null
-							}
-							<br />
+				<div className="container">
+					<div className="row">
+						<div className="col-lg">
+							<div className="panel panel-default">
+								<div className="panel-heading">
+									<h2>{this.state.title}</h2>
+								</div>
+							</div>
 						</div>
-					);
-				}) : <h1>No Surveys Submitted Yet</h1>}
+						<div className="panel-body">
+							<div className="row">
+								<div className="col-sm-12 col-md-10  col-md-offset-1 ">
+									{this.state.respondents ? <div><strong>Number of respondents:</strong> this.state.respondents</div> : null}
+									{this.state.questions.length !== 0 ? this.state.questions.map((question, i = 0) => {
+										i++;
+										return (
+											<div key={i + 'd'}>
+												<strong>{question.title}</strong>
+												<br />
+												{
+													question.type === 'agreedisagree' ?
+														this.agreeDisagreeResults(question) : null
+												}
+												{
+													question.type === 'multiplechoice' ?
+														question.results.map((answer) => {
+															return this.multipleChoiceResults(answer);
+														}) : null
+												}
+												{
+													question.type === 'shortanswer' ?
+														question.results.map((answer, i) => {
+															i++;
+															return this.shortAnswerResults(answer);
+														}) : null
+												}
+												<br />
+											</div>
+										);
+									}) : <h1>No Surveys Submitted Yet</h1>}
+								</div>
+							</div>
+						</div>
+						<div className="panel-footer ">
+						</div>
+					</div>
+				</div>
 			</div>
 		);
 	}

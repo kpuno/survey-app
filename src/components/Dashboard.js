@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as surveyActions from '../reducers/survey';
 import { Link, browserHistory } from 'react-router';
-import { Button } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 
 class Dashboard extends Component {
-	constructor(props){
+	constructor(props) {
 		super(props);
 
 		this.getSurvey = this.getSurvey.bind(this);
@@ -16,27 +16,48 @@ class Dashboard extends Component {
 	getSurvey(title, email) {
 		this.props.actions.getSurvey(title, email);
 		browserHistory.push('/survey');
-	}	
+	}
+
+	createSurvey() {
+		browserHistory.push('/createsurvey');
+	}
 
 	displaySurveys() {
-		return( 
-			<ul>
-				{this.props.user.surveys.map((survey, i = 0) => {
-					i++;
-					return (
-						<li key={i} onClick={() => this.getSurvey(survey.title, survey.email)}>{survey.title}</li>
-					);
-				})}
-			</ul>
+		return (
+			<div className="row col-md-12 custyle">
+				<Table striped bordered condensed hover>
+					<thead>
+						<tr>
+							<th>Title</th>
+							<th>View</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+					{this.props.user.surveys.map((survey, i = 0) => {
+						i++;
+						return (
+							<tr key={i}>
+								<td>{survey.title}</td>
+								<td><button onClick={() => this.getSurvey(survey.title, survey.email)} className="btn btn-info btn-md"><span className="glyphicon glyphicon-sunglasses"></span> View</button></td>
+								<td><button className="btn btn-danger btn-md"><span className="glyphicon glyphicon-remove"></span> Delete</button></td>
+							</tr>
+						);
+					})}
+					</tbody>
+				</Table>
+			</div>
 		);
 	}
 
 	render() {
-		return(
-			<div>
-				<h1>Dashboard</h1>
-					<Button><Link to="/createsurvey">Create Survey</Link></Button>
+		return (
+			<div className="container">
+				<div className="row">
+					<h1>Dashboard</h1>
+					<Button className="btn-md" bsStyle="primary" onClick={this.createSurvey}>Create Survey</Button>
 					{this.props.user.surveys !== undefined ? this.displaySurveys() : null}
+				</div>
 			</div>
 		);
 	}

@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as resultsActions from '../../reducers/results';
 import { browserHistory } from 'react-router';
+import { Table } from 'react-bootstrap';
 
 class Analytics extends Component {
-	constructor(props){
+	constructor(props) {
 		super(props);
 
 		this.getSurvey = this.getSurvey.bind(this);
@@ -15,26 +16,41 @@ class Analytics extends Component {
 	getSurvey(title, email) {
 		this.props.actions.searchResults(title, email);
 		browserHistory.push('/analytics/' + title);
-	}	
+	}
 
 	displaySurveys() {
-		return( 
-			<ul>
-				{this.props.user.surveys.map((survey, i = 0) => {
-					i++;
-					return (
-						<li key={i} onClick={() => this.getSurvey(survey.title, survey.email)}>{survey.title}</li>
-					);
-				})}
-			</ul>
+		return (
+			<div className="row col-md-12 custyle">
+				<Table striped bordered condensed hover>
+					<thead>
+						<tr>
+							<th>Title</th>
+							<th>View Statistics</th>
+						</tr>
+					</thead>
+					<tbody>
+						{this.props.user.surveys.map((survey, i = 0) => {
+							i++;
+							return (
+								<tr key={i}>
+									<td>{survey.title}</td>
+									<td><button onClick={() => this.getSurvey(survey.title, survey.email)} className="btn btn-info btn-md"><span className="glyphicon glyphicon-sunglasses"></span> View</button></td>
+								</tr>
+							);
+						})}
+					</tbody>
+				</Table>
+			</div>
 		);
 	}
 
 	render() {
-		return(
-			<div>
-				<h1>Analytics</h1>
+		return (
+			<div className="container">
+				<div className="row">
+					<h1>Analytics</h1>
 					{this.props.user.surveys !== undefined ? this.displaySurveys() : null}
+				</div>
 			</div>
 		);
 	}

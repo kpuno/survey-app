@@ -10,7 +10,7 @@ export default class HomePage extends React.Component {
 		return (
 			<div>
 				<h2>Home Page</h2>
-				<SearchBar/>
+				<SearchBar />
 			</div>
 		);
 	}

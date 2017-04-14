@@ -24,7 +24,7 @@ class SearchSurvey extends Component {
 				let newObj = {
 					title: nextProps.surveyList[key].title,
 					email: nextProps.surveyList[key].email,
-					expiryDate: new Date(nextProps.surveyList[key].expiryDate).toDateString()
+					expiryDate: new Date([nextProps.surveyList[key].expiryDate]).toDateString()
 				};
 				return newObj;
 			});
@@ -42,23 +42,70 @@ class SearchSurvey extends Component {
 	}
 
 	renderList(title, i, email, expiryDate) {
+		console.log(new Date('2017-11-11'));
+		console.log(this.state.today);
+		console.log(expiryDate);
+		console.log(expiryDate < this.state.today);
 		if (expiryDate > this.state.today) {
+			let date = expiryDate.split(' ');
+			let day = date[2];
+			let month = date[1];
+			let year = date[3];
 			return (
-				<li onClick={() => this.getSurvey(title, email)} key={i}>{title} by {email} expires: {expiryDate} datenow: {this.state.today}</li>
+				<li key={i}>
+					<time datetime="2014-07-20">
+						<span className="day">{day}</span>
+						<span className="month">{month}</span>
+						<span className="year">{year}</span>
+					</time>
+					<div className="info">
+						<h2 className="title" onClick={() => this.getSurvey(title, email)}>{title}</h2>
+						<p className="desc">Created by: {email} </p>
+					</div>
+				</li>
 			);
 		} else {
 			return (
-				<li onClick={() => this.expiredLink()} key={i}>{title} by {email} expires: {expiryDate} datenow: {this.state.today} EXPIRED!</li>
+				<li key={i}>
+					<time datetime="2014-07-20">
+						<span className="exipred">&nbsp;</span>
+						<span className="exipred">EXP</span>
+						<span className="exipred">IRED</span>
+					</time>
+					<div className="info">
+						<h2 className="title" onClick={() => this.expiredLink()}>{title}</h2>
+						<p className="desc">Created by: {email}</p>
+					</div>
+				</li>
 			);
 		}
 	}
 
 	render() {
 		return (
-			<div>
-				<h1>Search Page Works</h1>
-				<SearchBar />
-				{this.state.survey.length !== 0 ? <ul>{this.state.survey.map((survey, i = 0) => { i++; return this.renderList(survey.title, i, survey.email, survey.expiryDate); })}</ul> : null}
+			<div className="container">
+				<div className="row">
+					<h1>Search Page Works</h1>
+					<SearchBar />
+				</div>
+				<hr/>
+				<div className="container">
+					<div className="row">
+						<div className="[ col-xs-12 col-sm-offset-2 col-sm-8 ]">
+							{this.state.survey.length !== 0 ?
+								<ul className="event-list">
+									{this.state.survey.map((survey, i = 0) => {
+										{/*console.log(survey);*/}
+										i++;
+										return this.renderList(survey.title, i, survey.email, survey.expiryDate);
+									}
+									)}
+								</ul>
+								: null
+							}
+						</div>
+					</div>
+				</div>
 			</div>
 		);
 	}

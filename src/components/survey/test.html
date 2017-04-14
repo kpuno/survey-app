@@ -1,0 +1,55 @@
+<div>
+				<Form>
+					<h1>Create Survey</h1>
+					<p>Title</p>
+					<input type="text"  />
+					<p>Expiry Date</p>
+					<input type="text"  />
+					
+				</Form>
+				<Button onClick={() => this.appendInput()}>Add Question</Button>
+				<Button onClick={this.onSubmit}>Add Survey</Button>
+			</div>
+
+
+			<div className="container">
+				<h1>Create Survey</h1>
+				<div className="row">
+					<div className="col-lg">
+						<div className="panel panel-default">
+							<div className="panel-heading">
+								<div className="form-group">
+									<div className="input-group">
+										<span className="input-group-addon">
+											<strong>Title</strong>
+										</span>
+										<input className="form-control input-lg" name="text" type="text" />
+									</div>
+								</div>
+							</div>
+							<form className="form-group">
+								<div className="panel-body">
+									<div className="row">
+										<div className="col-sm-12 col-md-10  col-md-offset-1 ">
+											<div className="form-group" >
+												<div className="form-group">
+													<div className="input-group">
+														<span className="input-group-addon">
+															<strong>Expiry Date</strong>
+														</span>
+														<input className="form-control input-lg" name="password" type="text" />
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							<div className="panel-footer ">
+								<Button bsStyle="primary" onClick={() => this.appendInput()}>Add Question</Button>
+								<Button className="pull-right" bsStyle="success" onClick={this.onSubmit}>Add Survey</Button>
+							</div>
+						</div>
+					</div>
+				</div >
+			</div >
