@@ -42,10 +42,6 @@ class SearchSurvey extends Component {
 	}
 
 	renderList(title, i, email, expiryDate) {
-		console.log(new Date('2017-11-11'));
-		console.log(this.state.today);
-		console.log(expiryDate);
-		console.log(expiryDate < this.state.today);
 		if (expiryDate > this.state.today) {
 			let date = expiryDate.split(' ');
 			let day = date[2];
@@ -95,7 +91,6 @@ class SearchSurvey extends Component {
 							{this.state.survey.length !== 0 ?
 								<ul className="event-list">
 									{this.state.survey.map((survey, i = 0) => {
-										{/*console.log(survey);*/}
 										i++;
 										return this.renderList(survey.title, i, survey.email, survey.expiryDate);
 									}

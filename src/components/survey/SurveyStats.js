@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as resultsActions from '../../reducers/results';
+import { Button } from 'react-bootstrap';
 
 class SurveyStats extends Component {
 	constructor(props) {
@@ -15,6 +16,7 @@ class SurveyStats extends Component {
 		this.shortAnswerResults = this.shortAnswerResults.bind(this);
 		this.multipleChoiceResults = this.multipleChoiceResults.bind(this);
 		this.agreeDisagreeResults = this.agreeDisagreeResults.bind(this);
+		this.downloadCSV = this.downloadCSV.bind(this);
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -125,6 +127,16 @@ class SurveyStats extends Component {
 		);
 	}
 
+	downloadCSV() {
+		let data = new Blob([JSON.stringify(this.state)], { type: 'text/csv' });
+		let csvURL = window.URL.createObjectURL(data);
+		let tempLink = document.createElement('a');
+		tempLink.href = csvURL;
+		tempLink.setAttribute('download', 'surveystats.json');
+		tempLink.click();
+		// window.open(tempLink);
+	}
+
 	render() {
 		return (
 			<div>
@@ -173,6 +185,7 @@ class SurveyStats extends Component {
 							</div>
 						</div>
 						<div className="panel-footer ">
+							<Button bsStyle="primary" download="stats.csv" onClick={this.downloadCSV}>Download</Button>
 						</div>
 					</div>
 				</div>

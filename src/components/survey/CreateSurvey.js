@@ -198,7 +198,6 @@ class CreateSurvey extends Component {
 												<div id="dynamicInput">
 													{this.state !== null || this.state !== undefined ? this.state.survey.map((input, val = 0) => {
 														val++;
-														console.log(this.state.survey)
 														let index = val - 1;
 														return (
 															<div key={val + 'd'}>

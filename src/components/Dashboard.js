@@ -11,6 +11,7 @@ class Dashboard extends Component {
 
 		this.getSurvey = this.getSurvey.bind(this);
 		this.displaySurveys = this.displaySurveys.bind(this);
+		this.removeSurvey = this.removeSurvey.bind(this);
 	}
 
 	getSurvey(title, email) {
@@ -22,6 +23,10 @@ class Dashboard extends Component {
 		browserHistory.push('/createsurvey');
 	}
 
+	removeSurvey(title, email) {
+		this.props.actions.deleteSurvey(title, email);
+	}
+
 	displaySurveys() {
 		return (
 			<div className="row col-md-12 custyle">
@@ -29,8 +34,9 @@ class Dashboard extends Component {
 					<thead>
 						<tr>
 							<th>Title</th>
+							<th>Exipry Date</th>
+							<th>Delete</th>
 							<th>View</th>
-							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -39,8 +45,9 @@ class Dashboard extends Component {
 						return (
 							<tr key={i}>
 								<td>{survey.title}</td>
+								<td>{survey.expiryDate}</td>
+								<td><button onClick={() => this.removeSurvey(survey.title, survey.email)} className="btn btn-danger btn-md"><span className="glyphicon glyphicon-remove"></span> Delete</button></td>
 								<td><button onClick={() => this.getSurvey(survey.title, survey.email)} className="btn btn-info btn-md"><span className="glyphicon glyphicon-sunglasses"></span> View</button></td>
-								<td><button className="btn btn-danger btn-md"><span className="glyphicon glyphicon-remove"></span> Delete</button></td>
 							</tr>
 						);
 					})}

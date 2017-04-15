@@ -15,6 +15,7 @@ import SearchSurvey from './components/survey/SearchSurvey';
 import Analytics from './components/survey/Analytics';
 import SurveyStats from './components/survey/SurveyStats';
 import Exipred from './components/survey/Exipred';
+import Settings from './components/Settings';
 
 export default (
 	<Route path="/" component={App}>
@@ -28,7 +29,8 @@ export default (
 		<Route path="/searchsurvey" component={SearchSurvey} />
 		<Route path="/surveyexipred" component={Exipred} />
 		<Route path="/analytics" component={RequireAuth(Analytics)} />
-		<Route path="analytics/:title" component={RequireAuth(SurveyStats)} />
+		<Route path="/analytics/:title" component={RequireAuth(SurveyStats)} />
+		<Route path="/settings" component={RequireAuth(Settings)} />
 		<Route path="*" component={NotFoundPage} />
 	</Route>
 );

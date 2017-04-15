@@ -63,7 +63,7 @@ class NavBar extends React.Component {
 					<LinkContainer to={'/home'}><NavItem>Home</NavItem></LinkContainer>
 					{this.props.authenticated ? <LinkContainer to={'/dashboard'}><NavItem>Dashboard</NavItem></LinkContainer> : null}
 					{this.props.authenticated ? <LinkContainer to={'/analytics'}><NavItem>Analytics</NavItem></LinkContainer> : null}
-					{this.props.authenticated ? <LinkContainer to={'/settings'}><NavItem>Settings</NavItem></LinkContainer> : null}
+					{/*this.props.authenticated ? <LinkContainer to={'/settings'}><NavItem>Settings</NavItem></LinkContainer> : null*/}
 				</Nav>
 				<Nav pullRight>
 					{this.headerLinks()}

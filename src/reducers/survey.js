@@ -9,6 +9,8 @@ import { requestData, receiveData } from './loading';
 export const ADD_SURVEY_SUCCESS = 'ADD_SURVEY_SUCCESS';
 export const GET_CURRENT_SURVEY = 'GET_CURRENT_SURVEY';
 export const ADD_RESULTS = 'ADD_RESULTS';
+export const DELETE_SURVEY = 'DELETE_SURVEY';
+export const EDIT_SURVEY = 'EDIT_SURVEY';
 
 // reducer
 export function addSurvey({ title, survey, email, date }) {
@@ -39,7 +41,52 @@ export function getSurvey(title, email) {
 				dispatch(receiveData());
 				const currentSurvey = response.data;
 				dispatch({ type: GET_CURRENT_SURVEY, currentSurvey });
+			})
+			.catch(error => {
+				authError(dispatch, error);
 			});
+	};
+}
+
+export function deleteSurvey(title, email) {
+	return function (dispatch) {
+		dispatch(requestData());
+		axios.post(`${HOST_URL}/deletesurvey`, { title, email })
+			.then(response => {
+				dispatch(receiveData());
+				const currentSurvey = response.data;
+				dispatch({ type: DELETE_SURVEY, currentSurvey });
+			})
+			.then(axios.post(`${HOST_URL}/getusersurveys`, { email })
+				.then(response => {
+					dispatch(receiveData());
+					getUserSurveys(dispatch, response.data);
+				})
+				.catch(error => {
+					authError(dispatch, error);
+				})
+			);
+	};
+}
+
+export function editSurvey(title, email, expiryDate) {
+	return function (dispatch) {
+		dispatch(requestData());
+		axios.post(`${HOST_URL}/editexiprydate`, { title, email, expiryDate })
+			.then(response => {
+				dispatch(receiveData());
+				const currentSurvey = response.data;
+				dispatch({ type: EDIT_SURVEY, currentSurvey });
+			})
+			.then(axios.post(`${HOST_URL}/getusersurveys`, { email })
+				.then(response => {
+					dispatch(receiveData());
+					getUserSurveys(dispatch, response.data);
+				})
+				.catch(error => {
+					authError(dispatch, error);
+				})
+			);
 	};
 }
 
@@ -60,6 +107,10 @@ export default function (state = initialState.currentSurvey, action) {
 		case ADD_SURVEY_SUCCESS:
 			return state;
 		case ADD_RESULTS:
+			return state;
+		case DELETE_SURVEY:
+			return state;
+			case EDIT_SURVEY:
 			return state;
 		case GET_CURRENT_SURVEY:
 			return Object.assign({}, state, action.currentSurvey);
