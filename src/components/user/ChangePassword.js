@@ -1,5 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as userActions from '../../reducers/user';
 import { FormGroup, FormControl, ControlLabel, HelpBlock, Button } from 'react-bootstrap';
 
 class ChangePassword extends Component {
@@ -7,18 +9,19 @@ class ChangePassword extends Component {
 		super(props);
 
 		this.state = {
-			email: '',
-			displayName: ''
+			password: '',
+			confirmPassword: ''
 		};
 
 		this.handleChange = this.handleChange.bind(this);
 		this.getValidationState = this.getValidationState.bind(this);
+		this.onSubmit = this.onSubmit.bind(this);
 	}
 
 	getValidationState(state) {
 		const length = state.length;
-		if (length > 10) return 'success';
-		else if (length > 5) return 'warning';
+		if (length > 0) return 'success';
+		else if (length > 0) return 'warning';
 		else if (length > 0) return 'error';
 	}
 
@@ -26,39 +29,46 @@ class ChangePassword extends Component {
 		this.setState({ [e.target.name]: e.target.value });
 	}
 
+	onSubmit() {
+		let email = this.props.user.email;
+		let password = this.state.password;
+		let displayName = this.props.user.displayName;
+		if (this.state.password === this.state.confirmPassword && this.state.password !== null && this.state.password.length !== 0) {
+			this.props.actions.changePassword(email, displayName, password);
+			this.setState({ password: '', confirmPassword: '' });
+		}
+	}
+
 	render() {
 		return (
 			<div>
 				<form>
 					<FormGroup
-						validationState={this.getValidationState(this.state.email)}
+						validationState={this.getValidationState(this.state.password)}
 					>
-						<ControlLabel>Email</ControlLabel>
-						<FormControl
-							type="email"
-							value={this.state.email}
-							placeholder={this.props.user.email}
-							name="email"
-							onChange={this.handleChange}
-						/>
-						<FormControl.Feedback />
-						<HelpBlock>Validation is based on string length.</HelpBlock>
-					</FormGroup>
-					<FormGroup
-						validationState={this.getValidationState(this.state.displayName)}
-					>
-						<ControlLabel>Display Name</ControlLabel>
+						<ControlLabel>Password</ControlLabel>
 						<FormControl
 							type="text"
-							value={this.state.displayName}
-							placeholder={this.props.user.displayName}
-							name="displayName"
+							value={this.state.password}
+							name="password"
 							onChange={this.handleChange}
 						/>
 						<FormControl.Feedback />
-						<HelpBlock>Validation is based on string length.</HelpBlock>
 					</FormGroup>
-					<Button>
+					<FormGroup
+						validationState={this.getValidationState(this.state.confirmPassword)}
+					>
+						<ControlLabel>Confirm Password</ControlLabel>
+						<FormControl
+							type="text"
+							value={this.state.confirmPassword}
+							name="confirmPassword"
+							onChange={this.handleChange}
+						/>
+						<FormControl.Feedback />
+					</FormGroup>
+					{this.state.password !== this.state.confirmPassword ? <div><strong>Passwords do not match</strong><br /></div> : null}
+					<Button onClick={this.onSubmit}>
 						Submit
 					</Button>
 				</form>
@@ -73,9 +83,15 @@ ChangePassword.propTypes = {
 };
 
 function mapStateToProps(state) {
-	return	{
+	return {
 		user: state.user
 	};
 }
 
-export default connect(mapStateToProps)(ChangePassword);
+function mapDispatchToProps(dispatch) {
+	return {
+		actions: bindActionCreators(userActions, dispatch)
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChangePassword);

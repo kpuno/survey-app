@@ -16,6 +16,7 @@ import Analytics from './components/survey/Analytics';
 import SurveyStats from './components/survey/SurveyStats';
 import Exipred from './components/survey/Exipred';
 import Settings from './components/Settings';
+import ChangePassword from './components/user/ChangePassword';
 
 export default (
 	<Route path="/" component={App}>
@@ -24,6 +25,7 @@ export default (
 		<Route path="/signup" component={SignUp} />
 		<Route path="/dashboard" component={RequireAuth(Dashboard)} />
 		<Route path="/editprofile" component={RequireAuth(EditProfile)} />
+		<Route path="/changepassword" component={RequireAuth(ChangePassword)} />
 		<Route path="/createsurvey" component={RequireAuth(CreateSurvey)} />
 		<Route path="/survey" component={Survey} />
 		<Route path="/searchsurvey" component={SearchSurvey} />

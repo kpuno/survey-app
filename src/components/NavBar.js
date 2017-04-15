@@ -19,7 +19,15 @@ class NavBar extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (this.props.user != null) {
+			console.log("I AM HEREERERERER!!!");
 			this.setState({ username: nextProps.user });
+		}
+	}
+
+	componentWillMount(){
+		if (this.props.user != null) {
+			console.log("I AM HEREERERERER!!!");
+			this.setState({ username: this.props.user });
 		}
 	}
 
@@ -37,7 +45,7 @@ class NavBar extends React.Component {
 				[
 					<NavDropdown key={this.state.username} title={this.state.username}>
 						<MenuItem><Link to="/editprofile" className="nav-link">Edit Profile</Link></MenuItem>
-						<MenuItem>Change Password</MenuItem>
+						<MenuItem><Link to="/changepassword" className="nav-link">Change Password</Link></MenuItem>
 						<MenuItem><span key="signout" onClick={this.handleSignOut.bind(this)}><Link to="/" className="nav-link">Sign Out</Link></span></MenuItem>
 					</NavDropdown>
 				]

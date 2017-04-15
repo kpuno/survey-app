@@ -20,8 +20,8 @@ class EditProfile extends Component {
 
 	getValidationState(state) {
 		const length = state.length;
-		if (length > 10) return 'success';
-		else if (length > 5) return 'warning';
+		if (length > 0) return 'success';
+		else if (length > 0) return 'warning';
 		else if (length > 0) return 'error';
 	}
 
@@ -55,7 +55,6 @@ class EditProfile extends Component {
 							onChange={this.handleChange}
 						/>
 						<FormControl.Feedback />
-						<HelpBlock>Validation is based on string length.</HelpBlock>
 					</FormGroup>
 					<FormGroup
 						validationState={this.getValidationState(this.state.displayName)}
@@ -69,7 +68,6 @@ class EditProfile extends Component {
 							onChange={this.handleChange}
 						/>
 						<FormControl.Feedback />
-						<HelpBlock>Validation is based on string length.</HelpBlock>
 					</FormGroup>
 					<Button onClick={this.onSubmit}>
 						Submit

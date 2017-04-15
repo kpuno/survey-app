@@ -2,6 +2,7 @@ import initialState from './initialState';
 import axios from 'axios';
 const HOST_URL = 'https://survey-app-api.herokuapp.com';
 import { authError } from './auth';
+import { requestData, receiveData } from './loading';
 
 // actions
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
@@ -21,15 +22,52 @@ export function updateUser(currentEmail, email, displayName) {
 					let userInfo = response.data;
 					dispatch({ type: GET_USER_SUCCESS, userInfo });
 				})
+				.then(() =>
+					new Promise(resolve => {
+						setTimeout(() => {
+							axios.post(`${HOST_URL}/getuserinfo`, { email })
+								.then(response => {
+									getDisplayName(dispatch, response.data);
+								})
+								.then(axios.post(`${HOST_URL}/getusersurveys`, { email })
+									.then(response => {
+										dispatch(receiveData());
+										getUserSurveys(dispatch, response.data);
+									})
+								);
+							resolve();
+						}, 2000);
+					}))
+				.catch(error => {
+					authError(dispatch, error);
+				})
 				.catch(error => {
 					return error;
-				}))
-			.catch(error => {
-				authError(dispatch, error);
+				})
+			)
+	};
+}
+
+export function changePassword(email, displayName, password) {
+	return function (dispatch) {
+		dispatch(requestData());
+		axios.post(`${HOST_URL}/changePassword`, { email })
+			.then(() => {
 			})
-			.catch(error => {
-				return error;
-			});
+			.then(() =>
+				new Promise(resolve => {
+					setTimeout(() => {
+						(axios.post(`${HOST_URL}/signup`, { email, password, displayName })
+							.then(response => {
+								dispatch(receiveData());
+							})
+						)
+					}, 2000);
+				}))
+					.catch(error => {
+						return error;
+					})
+			// )
 	};
 }
 
@@ -59,7 +97,7 @@ export default function (state = initialState.user, action) {
 }
 
 export function getUserSurveys(dispatch, surveys) {
-	dispatch({ type: GET_USER_SURVEYS_SUCCESS, surveys});
+	dispatch({ type: GET_USER_SURVEYS_SUCCESS, surveys });
 }
 
 export function getDisplayName(dispatch, userInfo) {
