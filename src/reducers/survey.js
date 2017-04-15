@@ -14,6 +14,7 @@ export const EDIT_SURVEY = 'EDIT_SURVEY';
 
 // reducer
 export function addSurvey({ title, survey, email, date }) {
+	date = date.toDateString();
 	return function (dispatch) {
 		dispatch(requestData());
 		axios.post(`${HOST_URL}/addsurvey`, { title, survey, email, date })

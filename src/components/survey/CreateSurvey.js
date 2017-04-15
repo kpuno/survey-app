@@ -192,7 +192,7 @@ class CreateSurvey extends Component {
 													<span className="input-group-addon">
 														<strong>Expiry Date</strong>
 													</span>
-													<input className="form-control input-lg" name="password" type="text" onChange={this.dateChange} value={this.state.expiryDate} />
+													<input className="form-control input-lg" name="password" type="date" onChange={this.dateChange} value={this.state.expiryDate} />
 												</div>
 												<hr />
 												<div id="dynamicInput">
