@@ -7,11 +7,21 @@ const ImgVar = "http://linkword-pro.fr/images/background2.jpg";
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
 // component at the top-level.
+
+
 class App extends React.Component {
+
+	renderThis(){
+		return (
+			<div>TEST</div>
+		)
+	}
+
 	render() {
 		return (
 			<div>
 				<NavBar />
+				{this.props.location.pathname === '/' ? this.renderThis() : null}
 				<div className="container">
 					{this.props.isLoading.isLoading ? <Spinner /> : this.props.children}
 				</div>
