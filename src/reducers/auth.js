@@ -4,6 +4,7 @@ import initialState from './initialState';
 import { getDisplayName, getUserSurveys } from './user';
 const HOST_URL = 'https://survey-app-api.herokuapp.com';
 import { requestData, receiveData } from './loading';
+import toastr from 'toastr';
 
 // actions
 const AUTH_USER = 'AUTH_USER';
@@ -46,7 +47,9 @@ export function signInUser({ email, password }) {
 					})
 				))
 			.catch(error => {
-				authError(dispatch, error);
+				dispatch(receiveData());
+				toastr.error('Incorrect Email and Password combination')
+				// authError(dispatch, error);
 			});
 	};
 }
@@ -57,6 +60,11 @@ export function signUpUser({ email, password, displayName }) {
 		axios.post(`${HOST_URL}/signup`, { email, password, displayName })
 			.then(response => {
 				authorizeUser(dispatch, response.data.token);
+			})
+			.catch(error => {
+				dispatch(receiveData());
+				toastr.error('Email already in use!')
+				// authError(dispatch, error);
 			})
 			.then(() =>
 				new Promise(resolve => {
@@ -74,9 +82,6 @@ export function signUpUser({ email, password, displayName }) {
 						resolve();
 					}, 2000);
 				}))
-			.catch(error => {
-				authError(dispatch, error);
-			});
 	};
 }
 
@@ -98,9 +103,15 @@ export function fetchData() {
 					.then(response => {
 						dispatch({ type: FETCH_DATA, data: response.data });
 					})
-					.catch(error => authError(dispatch, error));
+					.catch(error =>
+						// authError(dispatch, error)
+						console.log(error)
+					);
 			})
-			.catch(error => authError(dispatch, error));
+			.catch(error =>
+				// authError(dispatch, error)
+				console.log(error)
+			);
 	};
 }
 

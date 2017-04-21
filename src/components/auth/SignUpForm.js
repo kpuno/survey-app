@@ -20,7 +20,7 @@ const SignUpForm = props => {
 					<span className="input-group-addon">
 						<i className="glyphicon glyphicon-user"></i>
 					</span>
-					<Field className="form-control" name="displayName" component={renderField} type="test" placeholder="Display Name" />
+					<Field className="form-control" name="displayName" component={renderField} type="text" placeholder="Display Name" />
 				</div>
 			</div >
 			<div className="form-group">

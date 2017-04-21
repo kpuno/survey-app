@@ -16,9 +16,11 @@ class SearchSurvey extends Component {
 
 		this.renderList = this.renderList.bind(this);
 		this.getSurvey = this.getSurvey.bind(this);
+		// this.clearState = this.clearState.bind(this);
 	}
 
 	componentWillReceiveProps(nextProps) {
+		// this.clearState();
 		if (nextProps) {
 			const obj = Object.keys(nextProps.surveyList).map(function (key) {
 				let newObj = {
@@ -31,6 +33,11 @@ class SearchSurvey extends Component {
 			this.setState({ survey: obj });
 		}
 	}
+
+	// clearState() {
+	// 	let empty = [];
+	// 	this.setState({ survey: empty });
+	// }
 
 	getSurvey(title, email) {
 		this.props.actions.getSurvey(title, email);

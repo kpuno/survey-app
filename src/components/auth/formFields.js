@@ -26,5 +26,10 @@ export const signUpFields = {
     tag: 'input',
     type: 'password',
     placeholder: 'Confirm Password'
-  }
+  },
+	displayName: {
+		tag: 'input',
+		type: 'text',
+		placeholder: 'Display Name'
+	}
 };
