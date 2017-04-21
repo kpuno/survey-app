@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as surveyActions from '../../reducers/survey';
 import { Button, Form, Label } from 'react-bootstrap';
+import toastr from 'toastr';
+import { browserHistory } from 'react-router';
 
 class CreateSurvey extends Component {
 	constructor(props) {
@@ -105,8 +107,10 @@ class CreateSurvey extends Component {
 		// 		{ q4: '' }
 		// 	]
 		// }
+		toastr.success('Successfuly created Survey!');
 		this.props.actions.addSurvey({ title, survey, email, date });
 		this.setState({ title: '', email: '', date: '' });
+		// browserHistory.push('/dashboard');
 	}
 
 	addMultipleChoice(input, index, val) {

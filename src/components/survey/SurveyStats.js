@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as resultsActions from '../../reducers/results';
 import { Button } from 'react-bootstrap';
+import toastr from 'toastr';
 
 class SurveyStats extends Component {
 	constructor(props) {
@@ -134,6 +135,7 @@ class SurveyStats extends Component {
 		tempLink.href = csvURL;
 		tempLink.setAttribute('download', 'surveystats.json');
 		tempLink.click();
+		toastr.success('Download Successful!');
 		// window.open(tempLink);
 	}
 
@@ -185,7 +187,7 @@ class SurveyStats extends Component {
 							</div>
 						</div>
 						<div className="panel-footer ">
-							<Button bsStyle="primary" download="stats.csv" onClick={this.downloadCSV}>Download</Button>
+							{this.state.respondents ? <Button bsStyle="primary" download="stats.csv" onClick={this.downloadCSV}>Download</Button> : <Button disabled bsStyle="primary" download="stats.csv">Download</Button>}
 						</div>
 					</div>
 				</div>
