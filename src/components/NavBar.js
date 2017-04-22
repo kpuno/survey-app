@@ -4,6 +4,7 @@ import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router';
 import * as actions from '../reducers/auth';
+import toastr from 'toastr';
 
 // dashboard anayltics settings
 
@@ -36,6 +37,7 @@ class NavBar extends React.Component {
 	}
 
 	handleSignOut() {
+		toastr.success('Bye, see you soon');
 		this.props.deAuthUser();
 	}
 
@@ -68,7 +70,7 @@ class NavBar extends React.Component {
 					</Navbar.Brand>
 				</Navbar.Header>
 				<Nav>
-					<LinkContainer to={'/home'}><NavItem>Home</NavItem></LinkContainer>
+					<LinkContainer to={'/searchsurvey'}><NavItem>Search Surveys</NavItem></LinkContainer>
 					{this.props.authenticated ? <LinkContainer to={'/dashboard'}><NavItem>Dashboard</NavItem></LinkContainer> : null}
 					{this.props.authenticated ? <LinkContainer to={'/analytics'}><NavItem>Analytics</NavItem></LinkContainer> : null}
 					{/*this.props.authenticated ? <LinkContainer to={'/settings'}><NavItem>Settings</NavItem></LinkContainer> : null*/}

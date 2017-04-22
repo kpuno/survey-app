@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as userActions from '../../reducers/user';
 import { FormGroup, FormControl, ControlLabel, HelpBlock, Button } from 'react-bootstrap';
+import toastr from 'toastr';
 
 class EditProfile extends Component {
 	constructor(props) {
@@ -30,6 +31,7 @@ class EditProfile extends Component {
 	}
 
 	onSubmit() {
+		toastr.success('Updated Profile Succes!');
 		let currentEmail = this.props.user.email;
 		let email = this.state.email;
 		let displayName = this.state.displayName;
@@ -69,7 +71,7 @@ class EditProfile extends Component {
 						/>
 						<FormControl.Feedback />
 					</FormGroup>
-					<Button onClick={this.onSubmit}>
+					<Button bsStyle="primary" onClick={this.onSubmit}>
 						Submit
 					</Button>
 				</form>

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as userActions from '../../reducers/user';
 import { FormGroup, FormControl, ControlLabel, HelpBlock, Button } from 'react-bootstrap';
+import toastr from 'toastr';
 
 class ChangePassword extends Component {
 	constructor(props) {
@@ -30,6 +31,7 @@ class ChangePassword extends Component {
 	}
 
 	onSubmit() {
+		toastr.success('Updated password Success!');
 		let email = this.props.user.email;
 		let password = this.state.password;
 		let displayName = this.props.user.displayName;
@@ -68,7 +70,7 @@ class ChangePassword extends Component {
 						<FormControl.Feedback />
 					</FormGroup>
 					{this.state.password !== this.state.confirmPassword ? <div><strong>Passwords do not match</strong><br /></div> : null}
-					<Button onClick={this.onSubmit}>
+					<Button bsStyle="primary" onClick={this.onSubmit}>
 						Submit
 					</Button>
 				</form>

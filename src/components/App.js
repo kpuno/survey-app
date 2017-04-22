@@ -3,6 +3,7 @@ import NavBar from './NavBar';
 import Spinner from './Spinner';
 import { connect } from 'react-redux';
 const ImgVar = "http://linkword-pro.fr/images/background2.jpg";
+import LandingPage from './LandingPage';
 
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
@@ -11,9 +12,9 @@ const ImgVar = "http://linkword-pro.fr/images/background2.jpg";
 
 class App extends React.Component {
 
-	renderThis(){
+	renderThis() {
 		return (
-			<div>TEST</div>
+			<LandingPage />
 		)
 	}
 
@@ -21,10 +22,11 @@ class App extends React.Component {
 		return (
 			<div>
 				<NavBar />
-				{this.props.location.pathname === '/' ? this.renderThis() : null}
-				<div className="container">
-					{this.props.isLoading.isLoading ? <Spinner /> : this.props.children}
-				</div>
+				{this.props.location.pathname === '/' ? this.renderThis() :
+					<div className="container">
+						{this.props.isLoading.isLoading ? <Spinner /> : this.props.children}
+					</div>
+				}
 			</div>
 		);
 	}

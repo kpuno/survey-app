@@ -88,7 +88,7 @@ class SearchSurvey extends Component {
 		return (
 			<div className="container">
 				<div className="row">
-					<h1>Search Page Works</h1>
+					<h1>Search Page</h1>
 					<SearchBar />
 				</div>
 				<hr/>
