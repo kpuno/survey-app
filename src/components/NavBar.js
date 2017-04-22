@@ -20,14 +20,12 @@ class NavBar extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (this.props.user != null) {
-			console.log("I AM HEREERERERER!!!");
 			this.setState({ username: nextProps.user });
 		}
 	}
 
 	componentWillMount(){
 		if (this.props.user != null) {
-			console.log("I AM HEREERERERER!!!");
 			this.setState({ username: this.props.user });
 		}
 	}
